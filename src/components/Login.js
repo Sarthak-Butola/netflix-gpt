@@ -1,7 +1,10 @@
 import React, { useRef, useState } from 'react'
-import { createBrowserRouter } from 'react-router-dom'
 import Header from './Header'
 import { checkValidData } from '../utils/Validate';
+import { getAuth, GoogleAuthProvider } from 'firebase/auth';
+import { signInWithPopup } from 'firebase/auth';
+import { auth } from '../utils/Firebase';
+ 
 
 const Login = () => {
   const [isSignIn, setIsSignIn] = useState(true);
@@ -11,11 +14,12 @@ const Login = () => {
   const password = useRef(null);
   const name = useRef(null);
 
+
   let toggleSignInForm = () => {
     setIsSignIn(!isSignIn);
   }
 
-  let handleButtonClick=()=>{
+  const handleButtonClick=()=>{
     //VALIDATE THE FORM DATA
     //NOW FOR PASSING THE VALUE OF EMAIL AND DATA, WE USE USEREF HOOK
     // console.log(email.current.value);
@@ -23,6 +27,14 @@ const Login = () => {
     let message = checkValidData(email.current.value, password.current.value);
     // console.log(message);
     setErrorMessage(message);
+  }
+
+  const handleGoogleLogin = ()=>{
+    const provider = new GoogleAuthProvider();
+    signInWithPopup(auth, provider).then(async(result)=>{
+      console.log(result);
+    })
+
   }
 
   return (
@@ -54,8 +66,12 @@ const Login = () => {
       <span className=' p-2 text-gray-400'>{isSignIn ? "New to Netflix?" : "Already a member?" }</span>
 
       <span className='text-white font-bold cursor-pointer hover:border-b' onClick={toggleSignInForm}>
+      {isSignIn ? "Sign Up" : "Sign In Now" }</span>   
 
-      {isSignIn ? "Sign Up" : "Sign In Now" }</span>      
+      <span className='text-white px-2'>|</span>
+
+      <span className='text-white font-bold px-2 cursor-pointer hover:border-b' onClick={handleGoogleLogin} >{isSignIn ? "Google Sign In" : "Google Sign Up"}</span>   
+
     </form>
     
     </div>
