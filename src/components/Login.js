@@ -4,6 +4,8 @@ import { checkValidData } from '../utils/Validate';
 import { getAuth, GoogleAuthProvider } from 'firebase/auth';
 import { signInWithPopup } from 'firebase/auth';
 import { auth } from '../utils/Firebase';
+import { createUserWithEmailAndPassword} from 'firebase/auth';
+import { signInWithEmailAndPassword } from "firebase/auth";
  
 
 const Login = () => {
@@ -26,14 +28,52 @@ const Login = () => {
     // console.log(password.current.value);
     let message = checkValidData(email.current.value, password.current.value);
     // console.log(message);
+
     setErrorMessage(message);
+    if(message)return;
+
+    if(!isSignIn){
+      //Sign Up logic
+
+  createUserWithEmailAndPassword(auth, email.current.value, password.current.value)
+  .then((userCredential) => {
+    // Signed up 
+    const user = userCredential.user;
+    console.log(user);
+    // ...
+  })
+  .catch((error) => {
+    const errorCode = error.code;
+    const errorMessage = error.message;
+    setErrorMessage(errorCode + "-" + errorMessage);
+    // ..
+  });
+    }
+
+    else if(isSignIn){
+      //Sign In logic
+      
+      signInWithEmailAndPassword(auth, email.current.value, password.current.value)
+        .then((userCredential) => {
+          // Signed in 
+          const user = userCredential.user;
+          console.log(user);
+          // ...
+        })
+        .catch((error) => {
+          const errorCode = error.code;
+          const errorMessage = error.message;
+          setErrorMessage(errorCode + "-" + errorMessage);
+        });
+    }
+
   }
 
   const handleGoogleLogin = ()=>{
-    const provider = new GoogleAuthProvider();
-    signInWithPopup(auth, provider).then(async(result)=>{
-      console.log(result);
-    })
+    // const provider = new GoogleAuthProvider();
+    // signInWithPopup(auth, provider).then(async(result)=>{
+      // console.log(result);
+    // })
 
   }
 
@@ -45,7 +85,7 @@ const Login = () => {
       </div>
     
     {/* PREVENTING FORM FROM CALLING ON SUBMIT FUNCTION WHEN A BUTTON IS CLICKED */}
-      <form onSubmit={(e)=> e.preventDefault()} className='w-1/3 bg-black absolute p-12 mx-auto my-36 right-0 left-0 h-[500px] text-start rounded-lg bg-opacity-75'>
+      <form onSubmit={(e)=> e.preventDefault()} className='w-1/3 bg-black absolute p-12 mx-auto my-36 right-0 left-0 h-[550px] text-start rounded-lg bg-opacity-75'>
       <p className='text-white text-3xl font-bold py-4'>{isSignIn ? "Sign In" : "Sign Up | Get Started" }</p>
 
       { !isSignIn && <input ref={name} 

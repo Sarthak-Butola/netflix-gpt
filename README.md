@@ -68,3 +68,26 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 ### `npm run build` fails to minify
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+
+<!-- 
+// Import the functions you need from the SDKs you need
+import { initializeApp } from "firebase/app";
+import { getAnalytics } from "firebase/analytics";
+// TODO: Add SDKs for Firebase products that you want to use
+// https://firebase.google.com/docs/web/setup#available-libraries
+
+// Your web app's Firebase configuration
+// For Firebase JS SDK v7.20.0 and later, measurementId is optional
+const firebaseConfig = {
+  apiKey: "AIzaSyA-9yHL6LBoFSsVzro5uxrKH9kn6KjL7BE",
+  authDomain: "netflix-gpt-783c8.firebaseapp.com",
+  projectId: "netflix-gpt-783c8",
+  storageBucket: "netflix-gpt-783c8.appspot.com",
+  messagingSenderId: "876419813984",
+  appId: "1:876419813984:web:13ef85377d937d374ce905",
+  measurementId: "G-Q19BDFXFDP"
+};
+
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
+const analytics = getAnalytics(app); -->
