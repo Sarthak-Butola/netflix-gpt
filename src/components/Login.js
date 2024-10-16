@@ -6,9 +6,12 @@ import { signInWithPopup } from 'firebase/auth';
 import { auth } from '../utils/Firebase';
 import { createUserWithEmailAndPassword} from 'firebase/auth';
 import { signInWithEmailAndPassword } from "firebase/auth";
+import { useNavigate } from 'react-router-dom';
  
 
 const Login = () => {
+const navigate=useNavigate();
+
   const [isSignIn, setIsSignIn] = useState(true);
   const [errorMessage, setErrorMessage]= useState(null);
 
@@ -40,6 +43,7 @@ const Login = () => {
     // Signed up 
     const user = userCredential.user;
     console.log(user);
+    navigate("/browse");
     // ...
   })
   .catch((error) => {
@@ -58,6 +62,7 @@ const Login = () => {
           // Signed in 
           const user = userCredential.user;
           console.log(user);
+          navigate("/browse");
           // ...
         })
         .catch((error) => {
