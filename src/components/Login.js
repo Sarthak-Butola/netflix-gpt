@@ -1,16 +1,18 @@
 import React, { useRef, useState } from 'react'
 import Header from './Header'
 import { checkValidData } from '../utils/Validate';
-import { getAuth, GoogleAuthProvider } from 'firebase/auth';
+import { getAuth, GoogleAuthProvider, updateProfile } from 'firebase/auth';
 import { signInWithPopup } from 'firebase/auth';
 import { auth } from '../utils/Firebase';
 import { createUserWithEmailAndPassword} from 'firebase/auth';
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { useNavigate } from 'react-router-dom';
- 
+import { useDispatch } from 'react-redux';
+import { addUser } from '../utils/userSlice';
 
 const Login = () => {
 const navigate=useNavigate();
+const dispatch = useDispatch();
 
   const [isSignIn, setIsSignIn] = useState(true);
   const [errorMessage, setErrorMessage]= useState(null);
@@ -42,8 +44,24 @@ const navigate=useNavigate();
   .then((userCredential) => {
     // Signed up 
     const user = userCredential.user;
+
+    updateProfile(user,{
+      displayName:name.current.value, photoURL:"https://tse2.mm.bing.net/th?id=OIP.QN5C9_bRA5Loj5yLvAYU7QHaJ9&pid=Api&P=0&h=180",
+
+    }).then(()=>{
+      //AFTER SIGNING UP AND UPDATING PROFILE USER INFO LIKE DISPLAY-NAME ETC WE NAVIGATE TO BROWSE PAGE
+      //BEFORE THAT WE UPDATE THE USERSLICE BY DISPATCHING ACTION
+      const{uid, email, displayName, photoURL} = auth.currentUser ;
+      dispatch(addUser({uid: uid, email: email, displayName: displayName, photoURL: photoURL}));
+
+
+      navigate("/browse");
+    }).catch((error)=>{
+      setErrorMessage(error.message);
+  })
+
     console.log(user);
-    navigate("/browse");
+    
     // ...
   })
   .catch((error) => {
