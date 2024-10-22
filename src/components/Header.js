@@ -1,22 +1,48 @@
-import React from 'react'
-import { USER_AVATAR } from '../utils/constants'
+import React, { useEffect } from 'react'
+import { LOGO, USER_AVATAR } from '../utils/constants'
 import { useNavigate } from 'react-router-dom'
 import { auth } from '../utils/Firebase'
-import { signOut } from 'firebase/auth'
-import { useSelector } from 'react-redux'
+import { onAuthStateChanged, signOut } from 'firebase/auth'
+import { useDispatch, useSelector } from 'react-redux'
+import { addUser, removeUser } from '../utils/userSlice'
+
 
 
 const Header = () => {
   const user = useSelector((store)=>store.user)
   const navigate=useNavigate();
+  const dispatch=useDispatch();
+
+  //MOVED THIS TO HEADER AS IT IS PRESENT ALL ACROSS THE APP SO NOW WHENEVER IT LOADS UDEEFFECT CHECKS FOR AUTH CHANGE AND IF THERE IS A USER ADDED WE LOGIN ELSE WE LOF=GOUT SO WE DON'T HAVE TO NAVIGATE FROM ELSEWHERE HERE IS GOOD :)
+
+  //Also now without login if one tries to go to /browse then he is redirected back to login page
+
+  useEffect(()=>{
+    const unsubscribe =  onAuthStateChanged(auth, (user)=>{
+      if(user){
+        const{uid, email, displayName, photoURL} = user;
+        dispatch(addUser({uid: uid, email: email, displayName: displayName, photoURL: photoURL}));
+       
+        navigate("/browse");
+      }
+      else{
+        dispatch(removeUser());
+
+        navigate("/");
+      }
+     //UNSUBSCRIBE WHEN COMPONENT UNMOUNTS
+      return () => unsubscribe();
+
+    });
+  },[]);
 
   const handleSignOut =()=>{
     signOut(auth)
     .then(() => {
-      navigate("/");
+      // navigate("/");
     })
     .catch((error)=>{
-      navigate("/error");
+      // navigate("/error");
     });
   };
 
@@ -24,7 +50,7 @@ const Header = () => {
     <div className='absolute bg-gradient-to-b from-black pl-10 z-10 w-full '>
     
       <div className='flex justify-between'>
-      <img src='https://cdn.cookielaw.org/logos/dd6b162f-1a32-456a-9cfe-897231c7763c/4345ea78-053c-46d2-b11e-09adaef973dc/Netflix_Logo_PMS.png' className='w-44'/>
+      <img src={LOGO} className='w-44'/>
      
      { user &&
      <div className='flex pr-5 '>

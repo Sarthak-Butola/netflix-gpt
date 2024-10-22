@@ -9,6 +9,7 @@ import { signInWithEmailAndPassword } from "firebase/auth";
 import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { addUser } from '../utils/userSlice';
+import { BgImage, USER_AVATAR } from '../utils/constants';
 
 const Login = () => {
 const navigate=useNavigate();
@@ -46,7 +47,7 @@ const dispatch = useDispatch();
     const user = userCredential.user;
 
     updateProfile(user,{
-      displayName:name.current.value, photoURL:"https://tse2.mm.bing.net/th?id=OIP.QN5C9_bRA5Loj5yLvAYU7QHaJ9&pid=Api&P=0&h=180",
+      displayName:name.current.value, photoURL:USER_AVATAR,
 
     }).then(()=>{
       //AFTER SIGNING UP AND UPDATING PROFILE USER INFO LIKE DISPLAY-NAME ETC WE NAVIGATE TO BROWSE PAGE
@@ -80,7 +81,7 @@ const dispatch = useDispatch();
           // Signed in 
           const user = userCredential.user;
           console.log(user);
-          navigate("/browse");
+          // navigate("/browse");
           // ...
         })
         .catch((error) => {
@@ -104,7 +105,7 @@ const dispatch = useDispatch();
     <div >
       <Header/>
       <div className='absolute'>
-      <img className='' src='https://assets.nflxext.com/ffe/siteui/vlv3/f272782d-cf96-4988-a675-6db2afd165e0/web/IN-en-20241008-TRIFECTA-perspective_b28b640f-cee0-426b-ac3a-7c000d3b41b7_medium.jpg' alt='logo' />
+      <img className='' src={BgImage} alt='Bg-Image' />
       </div>
     
     {/* PREVENTING FORM FROM CALLING ON SUBMIT FUNCTION WHEN A BUTTON IS CLICKED */}
