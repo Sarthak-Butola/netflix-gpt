@@ -11,7 +11,7 @@ const dispatch=useDispatch();
 const getTrendingAll = async () => {
   const data = await fetch('https://api.themoviedb.org/3/trending/all/day?language=en-US', API_OPTIONS);
   const json = await data.json();
-  console.log(json);
+  // console.log(json);
   dispatch(addTrendingAll(json.results));
 }
 

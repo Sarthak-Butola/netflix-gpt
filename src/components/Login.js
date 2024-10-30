@@ -61,7 +61,7 @@ const dispatch = useDispatch();
       setErrorMessage(error.message);
   })
 
-    console.log(user);
+    // console.log(user);
     
     // ...
   })
@@ -80,7 +80,7 @@ const dispatch = useDispatch();
         .then((userCredential) => {
           // Signed in 
           const user = userCredential.user;
-          console.log(user);
+          // console.log(user);
           // navigate("/browse");
           // ...
         })
