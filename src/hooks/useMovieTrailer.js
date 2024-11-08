@@ -1,10 +1,12 @@
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { addTrailervideo } from "../utils/movieSlice";
 import React, { useEffect } from "react";
 import { API_OPTIONS } from "../utils/constants";
 
 
 const useMovieTrailer = (movieId) => {
+
+  const trailerVideo = useSelector(store=>store.movies.trailerVideo);
 
     //fetch trailer video and update store with trailer vdieo data
   const dispatch = useDispatch();
@@ -14,6 +16,7 @@ const useMovieTrailer = (movieId) => {
     const json=await data.json();
     // console.log(json);
 
+    
     const filterData = json.results.filter((video) => video.type === "Trailer")
 
     //IF NO TRAILER(i.e. filterData.length === 0) THEN TAKE FIRST VIDEO FROM JSON.RESULTS ELSE TAKE FIRST TRAILER FROM FILTER DATA.
@@ -25,7 +28,9 @@ const useMovieTrailer = (movieId) => {
   }
 
   useEffect(()=>{
-    getMovieVideos();
+    //MEMOIZATION
+
+   !trailerVideo && getMovieVideos();
   },[])
 
 }

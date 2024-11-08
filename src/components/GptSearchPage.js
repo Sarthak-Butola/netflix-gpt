@@ -7,7 +7,7 @@ const GptSearch = () => {
   return (
     <div className=''>
 
-    <div className='absolute -z-10'>
+    <div className=' -z-10 fixed'>
       <img  src={BgImage} alt='Bg-Image'  />
       </div>
       <GptSearchBar/>

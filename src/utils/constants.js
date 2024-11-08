@@ -9,9 +9,13 @@ export const USER_AVATAR =
     method: 'GET',
     headers: {
       accept: 'application/json',
-      Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI5NmMxN2FmZTg2MjQ4ZGM1ZGU1ZjkxNDdkZDEyMjVkZCIsIm5iZiI6MTcyOTcwNTA4NS41MjY3MTEsInN1YiI6IjY3MTdiM2JlOWY2MWVjNmJjZjE1MTU0OSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.k-53_HFmOYJnZHMk_vccKPIEwgVHAy7KS-9xNXXH148'
+      Authorization:process.env.REACT_APP_TMDB_KEY,
     }
   };
 
   export const IMG_CDN_URL = "https://image.tmdb.org/t/p/w500/";
+  
+  export const OPEN_AI_KEY = process.env.REACT_APP_OPEN_AI_KEY;
+
+  export const GROQ_API_KEY = process.env.REACT_APP_GROQ_API_KEY;
   
