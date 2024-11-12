@@ -84,14 +84,14 @@ const tmdbResults = await Promise.all(promiseArray);
 
 
   return (
-    <div className=' pt-[7%] flex justify-center '>
+    <div className=' md:pt-[7%] flex justify-center pt-[40%] '>
 
 
-   <form className='bg-black grid grid-cols-12 w-1/2 ' onSubmit={(e)=>e.preventDefault()}  >
+   <form className='bg-black grid grid-cols-12 md:w-1/2  w-full ' onSubmit={(e)=>e.preventDefault()}  >
 
     <input type="text"
       ref={searchText }
-     className=' p-2 m-4 rounded-md col-span-9 text-xl'
+     className=' p-2 m-4 rounded-md col-span-9 text-xl  '
      placeholder={lang[langKey].gptSearchPlaceHolder} />
 
     <button className='bg-red-700 rounded-lg m-4 py-2 px-4 text-white col-span-3 ' onClick={handleGptSearchClick} >{lang[langKey].search}</button>

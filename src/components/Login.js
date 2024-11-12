@@ -105,11 +105,11 @@ const dispatch = useDispatch();
     <div >
       <Header/>
       <div className='absolute'>
-      <img className='' src={BgImage} alt='Bg-Image' />
+      <img className=' object-cover md:w-screen h-screen' src={BgImage} alt='Bg-Image' />
       </div>
     
     {/* PREVENTING FORM FROM CALLING ON SUBMIT FUNCTION WHEN A BUTTON IS CLICKED */}
-      <form onSubmit={(e)=> e.preventDefault()} className='w-1/3 bg-black absolute p-12 mx-auto my-36 right-0 left-0 h-[550px] text-start rounded-lg bg-opacity-75'>
+      <form onSubmit={(e)=> e.preventDefault()} className=' w-full md:w-1/3 bg-black absolute p-12 mx-auto my-36 right-0 left-0 h-[550px] text-start rounded-lg bg-opacity-75'>
       <p className='text-white text-3xl font-bold py-4'>{isSignIn ? "Sign In" : "Sign Up | Get Started" }</p>
 
       { !isSignIn && <input ref={name} 

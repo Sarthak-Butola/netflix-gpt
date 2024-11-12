@@ -62,13 +62,14 @@ const handleLanguageChange = (e)=>{
 }
 
   return (
-    <div className='absolute bg-gradient-to-b from-black pl-10 z-10 w-full '>
+    <div className='absolute bg-gradient-to-b from-black pl-10 z-10 w-full  flex flex-col justify-between md:flex-row mx-auto'>
     
-      <div className='flex justify-between'>
-      <img src={LOGO} className='w-44'/>
+
+      <img src={LOGO} className='w-44 mx-auto md:mx-0'/>
      
      { user &&
-     <div className='flex pr-5 '>
+     <div className='flex pr-5 justify-between '>
+
 
 {   showGptSearch &&
       <select className='p-2 m-2 bg-gray-900 text-white rounded-md' onChange={handleLanguageChange}>
@@ -77,17 +78,18 @@ const handleLanguageChange = (e)=>{
         ))}
       </select>
 }
-
-      <button className='bg-purple-800 text-white p-2 mx-4 my-2 rounded-md' onClick={handleGptSearchClick} >
+      
+       <button className='bg-purple-800 text-white p-2 mx-4 my-2 rounded-md' onClick={handleGptSearchClick} >
         {showGptSearch ? "Home Page" : "GPT Search"}
         </button>
 
-      <img alt='User_LOGO' src={user?.photoURL}className='w-12 h-12 my-2 ' />
+      <img alt='User_LOGO'  src={user?.photoURL}className='w-12 h-12 my-2 hidden md:inline ' />
       <button className='text-white font-bold pl-2 ' onClick={handleSignOut}>[Sign Out]</button>
       
+
       </div>
       }
-      </div>
+  
 
     </div>
   )
