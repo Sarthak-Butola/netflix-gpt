@@ -100,7 +100,6 @@ const dispatch = useDispatch();
     // })
 
   }
-
   return (
     <div >
       <Header/>
@@ -129,12 +128,12 @@ const dispatch = useDispatch();
 
       <span className=' p-2 text-gray-400'>{isSignIn ? "New to Netflix?" : "Already a member?" }</span>
 
-      <span className='text-white font-bold cursor-pointer hover:border-b' onClick={toggleSignInForm}>
+      <span className='text-white font-bold cursor-pointer hover:border-b ' onClick={toggleSignInForm}>
       {isSignIn ? "Sign Up" : "Sign In Now" }</span>   
 
-      <span className='text-white px-2'>|</span>
+      {/* <span className='text-white px-2'>|</span> */}
 
-      <span className='text-white font-bold px-2 cursor-pointer hover:border-b' onClick={handleGoogleLogin} >{isSignIn ? "Google Sign In" : "Google Sign Up"}</span>   
+      {/* <span className='text-white font-bold px-2 cursor-pointer hover:border-b' onClick={handleGoogleLogin} >{isSignIn ? "Google Sign In" : "Google Sign Up"}</span>    */}
 
     </form>
     
